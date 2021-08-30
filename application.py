@@ -1,12 +1,15 @@
 import os
+import re
 from dotenv import load_dotenv
 
-from flask import Flask, session, render_template, redirect, url_for
+from flask import Flask, session, render_template, redirect, url_for, request
+from flask.wrappers import Request
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from tempfile import mkdtemp
 from helpers import login_required
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 
@@ -35,8 +38,55 @@ db = scoped_session(sessionmaker(bind=engine))
 def index():
     return "K pex"
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])  
 def login():
 
     session.clear()
+
+    if request.method == 'POST':
+        if request.form.get("login"):
+   
+            logemail = request.form.get("logemail")
+            rows = db.execute(f"SELECT COUNT(username) FROM users WHERE email = '{logemail}'").fetchall()
+            values = db.execute(f"SELECT * FROM users WHERE email = '{logemail}'").fetchall()
+                # Ensure username exists and password is correct
+            hashpass = request.form.get("logpass")
+
+            if not rows[0][0] != 1 or not check_password_hash(values[0]['hash'], hashpass):
+                #return "Nada"
+
+                # Remember which user has logged in
+                session["user_id"] = values[0]["id_user"]
+
+                # Redirect user to home page
+                return redirect("/")
+
     return render_template("login.html")
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+
+    if request.method == "POST":
+        logemail=request.form.get("logemail2")
+                    
+        rows = db.execute(f"SELECT COUNT(username) FROM users WHERE email = '{logemail}'").fetchall()
+                    
+        if rows[0][0] == 0:
+            logname = (request.form.get("logname2"))
+            logpass = generate_password_hash(request.form.get("logpass2"))
+                        
+            db.execute(f"INSERT INTO users(username, hash, email) VALUES ('{logname}', '{logpass}', '{logemail}')")
+
+            db.commit()
+            return redirect("/login")
+
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/")
