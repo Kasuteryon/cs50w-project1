@@ -36,7 +36,7 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/")
 @login_required
 def index():
-    return "K pex"
+    return render_template("index.html")
 
 @app.route("/login", methods=["GET", "POST"])  
 def login():
@@ -90,3 +90,8 @@ def logout():
 
     # Redirect user to login form
     return redirect("/")
+
+@app.route("/saved")
+def saved():
+
+    return render_template("saved.html")
