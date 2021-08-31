@@ -2,7 +2,7 @@ import os
 import re
 from dotenv import load_dotenv
 
-from flask import Flask, session, render_template, redirect, url_for, request
+from flask import Flask, session, render_template, redirect, url_for, request, flash
 from flask.wrappers import Request
 from flask_session import Session
 from sqlalchemy import create_engine
@@ -49,13 +49,15 @@ def login():
             logemail = request.form.get("logemail")
             rows = db.execute(f"SELECT COUNT(username) FROM users WHERE email = '{logemail}'").fetchall()
             values = db.execute(f"SELECT * FROM users WHERE email = '{logemail}'").fetchall()
-                # Ensure username exists and password is correct
-            hashpass = request.form.get("logpass")
 
-            if not rows[0][0] != 1 or not check_password_hash(values[0]['hash'], hashpass):
-                #return "Nada"
+            #hashpass = request.form.get("logpass")
+            check = check_password_hash(values[0]['hash'], request.form.get("logpass"))
+
+            if len(values) != 1 or check == False:
 
                 # Remember which user has logged in
+                return redirect("/login")
+            else:
                 session["user_id"] = values[0]["id_user"]
 
                 # Redirect user to home page
@@ -92,6 +94,7 @@ def logout():
     return redirect("/")
 
 @app.route("/saved")
+@login_required
 def saved():
 
     return render_template("saved.html")

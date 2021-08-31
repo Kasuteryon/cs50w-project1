@@ -1,5 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+
 $base-color: linear-gradient(to right,#0099FF, #0066FF, #0033FF);
+$card-color: #2a2b38;
 
 nav{
-    background: black !important;
+    background: $card-color !important;
+}
+
+body{
+	font-family: 'Poppins', sans-serif;
+	font-weight: 300;
+	font-size: 15px;
+	line-height: 1.7;
+	color: #fff;
+	background: $base-color !important;
+	overflow-x: hidden;
 }

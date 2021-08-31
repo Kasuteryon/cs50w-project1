@@ -1,4 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 nav {
-  background: black !important;
+  background: #2a2b38 !important;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #fff;
+  background: -webkit-gradient(linear, left top, right top, from(#0099FF), color-stop(#0066FF), to(#0033FF)) !important;
+  background: linear-gradient(to right, #0099FF, #0066FF, #0033FF) !important;
+  overflow-x: hidden;
 }
 /*# sourceMappingURL=index-style.css.map */
