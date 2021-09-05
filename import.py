@@ -22,11 +22,11 @@ def main():
         if title == "title":
             print("Saltamos primer linea")
         else:    
-            db.execute("INSERT INTO books (isbn, title, author, publish_date) VALUES (:isbn, :author, :title, :year)",
+            db.execute("INSERT INTO books (isbn, title, author, publish_date) VALUES (:isbn, :title, :author, :year)",
                     {"isbn": isbn, "author": author, "title": title, "year": year})
 
             i += 1
-            print(f"Registro {i}")
+            print(f"{i}: {isbn} - {author} - {title} - {year}")
             db.commit()
 
 if __name__ == "__main__":

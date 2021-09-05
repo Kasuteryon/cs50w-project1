@@ -6,16 +6,44 @@
 
 {% block main %}
 
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title">Libro X</h1>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam consequuntur, 
-                ipsa aliquid vitae recusandae numquam velit officiis repudiandae natus facilis sit eligendi! Dolorum illo doloremque, 
-                facere eligendi tenetur consectetur quibusdam.
-                </p>
+    <div class="container row">
+        {% for book in books %}
+        <div class="col-sm-6 col-lg-3">
+            <div class="card">
+                <img src="https://cdn.dribbble.com/users/803982/screenshots/2286778/13_-_play_edicola.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 class="card-title">{{book.title}}</h3>
+                    <h6 class="card-subtitle mb-2 text-muted">ISBN: {{book.isbn}}</h6>
+                    <p class="card-text">
+                        Autor: {{book.author}}
+                    </p>
+                    <p class="card-text">
+                        Fecha de Publicación: {{book.publish_date}}
+                    </p>
+
+                    <button class="btn mt-6">
+                        Detalles
+                    </button>
+                </div>
             </div>
         </div>
+        {% endfor %}
+
+        <nav aria-label="...">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <span class="page-link"><</span>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active" aria-current="page">
+                <span class="page-link">2</span>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">></a>
+              </li>
+            </ul>
+        </nav>
     </div>
 
 {% endblock %}

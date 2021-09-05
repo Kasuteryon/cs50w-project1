@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
 
-$base-color: linear-gradient(to right,#0099FF, #0066FF, #0033FF);
+$base-color: #0099FF;
 $back-color: #2a2b38;
 $card-color: #1f2029;
 
@@ -16,12 +16,42 @@ body{
 }
 
 .card{
+	
     background-color: $card-color !important;
+	margin-bottom: 20px;
 }
 
 .header{
     background-color: $back-color !important;
 }
 
-
-
+.btn{  
+    border-radius: 4px;
+    height: 44px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 200ms linear;
+    padding: 0 30px;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    text-align: center;
+    border: none;
+    background-color: $base-color;
+    color: #fff;
+    box-shadow: 0 8px 24px 0 $base-color;
+}
+.btn:active,
+.btn:focus{  
+  background-color: #fff;
+  color: $base-color;
+  box-shadow: 0 8px 24px 0 rgba(255,255,255,.2);
+}
+.btn:hover{  
+  background-color: #fff;
+  color: $base-color;
+  box-shadow: 0 8px 24px 0 rgba(255,255,255,.2);
+}

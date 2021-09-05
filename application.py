@@ -37,12 +37,18 @@ db = scoped_session(sessionmaker(bind=engine))
 @login_required
 def index():
 
+    items = 20
     id = session.get("user_id")
     
     values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
     username = values[0]['username']
 
-    return render_template("index.html", username=username)
+    page = request.args.get('page', 1, type=int)
+
+    books = db.execute("SELECT * FROM Books limit 16").fetchall()
+    # print(query.paginate(page=page, per_page=items))
+
+    return render_template("index.html", username=username, books=books)
 
 @app.route("/login", methods=["GET", "POST"])  
 def login():
@@ -69,8 +75,8 @@ def login():
                 # Redirect user to home page
             username = values[0]['username']
 
-            return render_template("index.html", username=username)
-
+            #return render_template("index.html", username=username)
+            return redirect("/")
     return render_template("login.html")
     
 
