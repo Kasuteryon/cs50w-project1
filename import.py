@@ -17,13 +17,16 @@ db = scoped_session(sessionmaker(bind=engine))
 def main():
     f = open("books.csv")
     reader = csv.reader(f)
+    i = 0
     for isbn, title, author, year in reader:
         if title == "title":
             print("Saltamos primer linea")
         else:    
             db.execute("INSERT INTO books (isbn, title, author, publish_date) VALUES (:isbn, :author, :title, :year)",
                     {"isbn": isbn, "author": author, "title": title, "year": year})
-        
+
+            i += 1
+            print(f"Registro {i}")
             db.commit()
 
 if __name__ == "__main__":

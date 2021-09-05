@@ -2,11 +2,8 @@
 
 
 $base-color: linear-gradient(to right,#0099FF, #0066FF, #0033FF);
-$card-color: #2a2b38;
-
-nav{
-    background: $card-color !important;
-}
+$back-color: #2a2b38;
+$card-color: #1f2029;
 
 body{
 	font-family: 'Poppins', sans-serif;
@@ -14,6 +11,17 @@ body{
 	font-size: 15px;
 	line-height: 1.7;
 	color: #fff;
-	background: $base-color !important;
+	background-color: $back-color !important;
 	overflow-x: hidden;
 }
+
+.card{
+    background-color: $card-color !important;
+}
+
+.header{
+    background-color: $back-color !important;
+}
+
+
+

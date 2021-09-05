@@ -36,7 +36,13 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/")
 @login_required
 def index():
-    return render_template("index.html")
+
+    id = session.get("user_id")
+    
+    values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
+    username = values[0]['username']
+
+    return render_template("index.html", username=username)
 
 @app.route("/login", methods=["GET", "POST"])  
 def login():
@@ -44,26 +50,29 @@ def login():
     session.clear()
 
     if request.method == 'POST':
-        if request.form.get("login"):
    
-            logemail = request.form.get("logemail")
-            rows = db.execute(f"SELECT COUNT(username) FROM users WHERE email = '{logemail}'").fetchall()
-            values = db.execute(f"SELECT * FROM users WHERE email = '{logemail}'").fetchall()
+        logemail = request.form.get("logemail")
+        # rows = db.execute(f"SELECT COUNT(username) FROM users WHERE email = '{logemail}'").fetchall()
+        values = db.execute(f"SELECT * FROM users WHERE email = '{logemail}'").fetchall()
+        
 
-            #hashpass = request.form.get("logpass")
-            check = check_password_hash(values[0]['hash'], request.form.get("logpass"))
+        #hashpass = request.form.get("logpass")
+        check = check_password_hash(values[0]['hash'], request.form.get("logpass"))
 
-            if len(values) != 1 or check == False:
+        if len(values) != 1 or check == False:
 
-                # Remember which user has logged in
-                return redirect("/login")
-            else:
-                session["user_id"] = values[0]["id_user"]
-
+          # Remember which user has logged in
+                
+            return redirect("/login")
+        else:
+            session["user_id"] = values[0]["id_user"]
                 # Redirect user to home page
-                return redirect("/")
+            username = values[0]['username']
+
+            return render_template("index.html", username=username)
 
     return render_template("login.html")
+    
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -97,4 +106,9 @@ def logout():
 @login_required
 def saved():
 
-    return render_template("saved.html")
+    id = session["user_id"] 
+
+    values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
+    username = values[0]['username']
+
+    return render_template("saved.html", username=username)
