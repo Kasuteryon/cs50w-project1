@@ -48,13 +48,6 @@ def index():
     books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 16").fetchall()
     booksAll = db.execute("SELECT * FROM Books ORDER BY title ").fetchall()
 
-    if request.method == 'POST':
-        
-        name = request.form.get("searchIn")
-        books = db.execute(f"SELECT id_book FROM Books WHERE title = {name}").fetchall()
-        id = books[0]["id_books"]
-
-        return redirect(f"/details/{id}")
     # print(query.paginate(page=page, per_page=items))
     #books.query.paginate()
     #print(books)

@@ -7,20 +7,31 @@
 {% block main %}
     <div class="container row text-center" style="margin-bottom: 30px;">
         <div class="form-group">
-            <form action="POST">
-                <input list="books" name="searchIn" 
+            
+             <!--<input list="books" name="search" 
                 class="form-style" 
                 placeholder="Titulo..." 
-                id="logpass" autocomplete="none">
-                <i class='bx bx-search input-icon'></i>
-                <datalist id="books" >
-                    {% for book in booksAll %}
-                    <option value="{{book.title}}" id="{{book.id_book}}">
-                    {% endfor %}
-                </datalist>
-
-                <button screen-name="details" class="btn mt-6">Buscar</button>
-            </form>
+                id="search" autocomplete="none">
+            <i class='bx bx-search input-icon'></i> 
+            <datalist class="form-style" id="books" onchange="location = this.value;">
+                {% for book in booksAll %}
+                <option screen-name="details" value="{{book.title}} - {{book.isbn}}">
+                <script>    
+                    $('#search').on('input', function(){
+                    let page = $(this).val();
+                    window.location.href = '/details/{{book.id_book}}' + page;
+                    });
+                </script>
+                {% endfor %}
+            </datalist> -->
+            <select class="form-style" id="books" onchange="location = this.value;">
+                <option value="#">Buscar...</option>
+                {% for book in booksAll %}
+                <option screen-name="details" value="/details/{{book.id_book}}">{{book.title}} - {{book.isbn}}</option>
+                {% endfor %}
+            </select> 
+            
+            
         </div>
     </div>
 
