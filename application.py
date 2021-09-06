@@ -47,6 +47,14 @@ def index():
 
     books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 16").fetchall()
     booksAll = db.execute("SELECT * FROM Books ORDER BY title ").fetchall()
+
+    if request.method == 'POST':
+        
+        name = request.form.get("searchIn")
+        books = db.execute(f"SELECT id_book FROM Books WHERE title = {name}").fetchall()
+        id = books[0]["id_books"]
+
+        return redirect(f"/details/{id}")
     # print(query.paginate(page=page, per_page=items))
     #books.query.paginate()
     #print(books)
@@ -79,6 +87,7 @@ def login():
 
             #return render_template("index.html", username=username)
             return redirect("/")
+
     return render_template("login.html")
     
 
@@ -110,16 +119,19 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-@app.route("/details")
+@app.route("/details/<int:id_book>")
 @login_required
-def details():
+def details(id_book):
 
     id = session["user_id"] 
 
     values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
     username = values[0]['username']
 
-    return render_template("details.html", username=username)
+    ## Para el detalle
+    book = db.execute(f"SELECT * FROM Books WHERE id_book = {id_book}").fetchall()
+
+    return render_template("detail.html", username=username, book=book)
 
 @app.route("/saved")
 @login_required

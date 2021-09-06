@@ -1,4 +1,3 @@
-
 {% extends "layout.html" %}
 
 {% block title %}
@@ -9,13 +8,28 @@
 
 <div class="container">
     <div class="card">
-        <div class="row">
+        <div class="row card-body">
+            {% for b in book %}
             <div class="col-6">
-
+                <h1>Título:</h1>
+                <h3>{{b.title}}</h3>
             </div>
             <div class="col-6">
-
+                <p>ISBN: {{b.isbn}}</p>
+                <p>Autor: {{b.author}}</p>
+                <p>Fecha de Publicación: {{b.publish_date}}</p>
+                
             </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h1>Reseñas:</h1>
         </div>
     </div>
 </div>

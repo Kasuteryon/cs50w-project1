@@ -7,20 +7,20 @@
 {% block main %}
     <div class="container row text-center" style="margin-bottom: 30px;">
         <div class="form-group">
-            <input list="books" name="search" 
-            class="form-style" 
-            placeholder="Titulo..." 
-            id="logpass" autocomplete="none">
-            <i class='bx bx-search input-icon'></i>
-            <datalist id="books" >
-                {% for book in booksAll %}
-                <option value="{{book.title}}" id="{{book.id_book}}">
-                {% endfor %}
-            </datalist>
+            <form action="POST">
+                <input list="books" name="searchIn" 
+                class="form-style" 
+                placeholder="Titulo..." 
+                id="logpass" autocomplete="none">
+                <i class='bx bx-search input-icon'></i>
+                <datalist id="books" >
+                    {% for book in booksAll %}
+                    <option value="{{book.title}}" id="{{book.id_book}}">
+                    {% endfor %}
+                </datalist>
 
-            <a href="" class="btn mt-6">
-                Buscar
-            </a>
+                <button screen-name="details" class="btn mt-6">Buscar</button>
+            </form>
         </div>
     </div>
 
@@ -39,9 +39,7 @@
                         Fecha de Publicación: {{book.publish_date}}
                     </p>
 
-                    <button class="btn mt-6">
-                        Detalles
-                    </button>
+                    <a screen-name="details" href="/details/{{book.id_book}}" class="btn mt-6">Detalles</a>
                 </div>
             </div>
         </div>
