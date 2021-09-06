@@ -26,11 +26,7 @@
 
 											<form action="{{ url_for('login')}}" method="post" value="login">
 												<h4 class="mb-4 pb-3">Iniciar Sesión</h4>
-												{% if error %}
-													<div class="alert alert-danger" role="alert">
-														{{ error }}
-													</div>
-												{% endif %}
+												
 												<div class="form-group">
 													<input required type="email" name="logemail" 
 													class="form-style" 
@@ -47,9 +43,7 @@
 													<i class="input-icon uil uil-lock-alt"></i>
 												</div>
 												<button name="login" value="login" class="btn mt-4">Entrar</button>
-												<p class="mb-0 mt-4 text-center">
-													<a class="link">¿Contraseña Olvidada?</a>
-												</p>
+												
 											</form>
 
 				      					</div>

@@ -13,7 +13,14 @@ body{
 	color: #fff;
 	background-color: $back-color !important;
 	overflow-x: hidden;
+
+  
+  background-image: url(../images/Home.svg);
+  background-attachment: fixed;
+  background-size: cover;
 }
+
+
 
 .card{
 	
@@ -54,4 +61,46 @@ body{
   background-color: #fff;
   color: $base-color;
   box-shadow: 0 8px 24px 0 rgba(255,255,255,.2);
+}
+.form-group{ 
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.form-style {
+  padding: 13px 20px;
+  padding-left: 55px;
+  height: 48px;
+  width: 100%;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  outline: none;
+  color: #c4c3ca;
+  background-color: #1f2029;
+  border: none;
+  transition: all 200ms linear;
+  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+}
+.form-style:focus,
+.form-style:active {
+  border: none;
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+}
+
+.input-icon {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 48px;
+  font-size: 24px;
+  line-height: 48px;
+  text-align: left;
+  color: $base-color;
+  transition: all 200ms linear;
 }

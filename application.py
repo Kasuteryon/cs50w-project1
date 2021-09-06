@@ -45,10 +45,12 @@ def index():
 
     page = request.args.get('page', 1, type=int)
 
-    books = db.execute("SELECT * FROM Books limit 16").fetchall()
+    books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 16").fetchall()
+    booksAll = db.execute("SELECT * FROM Books ORDER BY title ").fetchall()
     # print(query.paginate(page=page, per_page=items))
-
-    return render_template("index.html", username=username, books=books)
+    #books.query.paginate()
+    #print(books)
+    return render_template("index.html", username=username, books=books, booksAll=booksAll)
 
 @app.route("/login", methods=["GET", "POST"])  
 def login():
@@ -107,6 +109,17 @@ def logout():
 
     # Redirect user to login form
     return redirect("/")
+
+@app.route("/details")
+@login_required
+def details():
+
+    id = session["user_id"] 
+
+    values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
+    username = values[0]['username']
+
+    return render_template("details.html", username=username)
 
 @app.route("/saved")
 @login_required

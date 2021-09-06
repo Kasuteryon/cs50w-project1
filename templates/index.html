@@ -5,6 +5,24 @@
 {% endblock %}
 
 {% block main %}
+    <div class="container row text-center" style="margin-bottom: 30px;">
+        <div class="form-group">
+            <input list="books" name="search" 
+            class="form-style" 
+            placeholder="Titulo..." 
+            id="logpass" autocomplete="none">
+            <i class='bx bx-search input-icon'></i>
+            <datalist id="books" >
+                {% for book in booksAll %}
+                <option value="{{book.title}}" id="{{book.id_book}}">
+                {% endfor %}
+            </datalist>
+
+            <a href="" class="btn mt-6">
+                Buscar
+            </a>
+        </div>
+    </div>
 
     <div class="container row">
         {% for book in books %}
@@ -29,21 +47,6 @@
         </div>
         {% endfor %}
 
-        <nav aria-label="...">
-            <ul class="pagination">
-              <li class="page-item disabled">
-                <span class="page-link"><</span>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active" aria-current="page">
-                <span class="page-link">2</span>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">></a>
-              </li>
-            </ul>
-        </nav>
     </div>
 
 {% endblock %}
