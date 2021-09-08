@@ -124,10 +124,14 @@ def details(id_book):
     ## Para el detalle
     book = db.execute(f"SELECT * FROM Books WHERE id_book = {id_book}").fetchall()
 
-    reviews = db.execute("SELECT * FROM reviews").fetchall()
+    reviews = db.execute("SELECT *, users.username FROM reviews INNER JOIN users ON reviews.id_user = users.id_user").fetchall()
     isset = db.execute(f"SELECT isset FROM reviews WHERE id_user = {id}").fetchall()
 
-    return render_template("detail.html", username=username, book=book, reviews=reviews, isset=isset)
+    bandera = False
+    if isset == 1:
+        bandera = True
+
+    return render_template("detail.html", username=username, book=book, reviews=reviews, bandera=bandera)
 
 @app.route("/saved")
 @login_required
