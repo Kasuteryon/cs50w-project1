@@ -1,14 +1,8 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {% block title %} Inicio {% endblock %} {% block main %}
+<div class="container row text-center" style="margin-bottom: 30px;">
+    <div class="form-group">
 
-{% block title %}
-    Inicio
-{% endblock %}
-
-{% block main %}
-    <div class="container row text-center" style="margin-bottom: 30px;">
-        <div class="form-group">
-            
-             <!--<input list="books" name="search" 
+        <!--<input list="books" name="search" 
                 class="form-style" 
                 placeholder="Titulo..." 
                 id="search" autocomplete="none">
@@ -24,38 +18,38 @@
                 </script>
                 {% endfor %}
             </datalist> -->
-            <select class="form-style" id="books" onchange="location = this.value;">
+        <select class="form-style" id="books" onchange="location = this.value;">
                 <option value="#">Buscar...</option>
                 {% for book in booksAll %}
                 <option screen-name="details" value="/details/{{book.id_book}}">{{book.title}} - {{book.isbn}}</option>
                 {% endfor %}
-            </select> 
-            
-            
-        </div>
+            </select>
+
+
     </div>
+</div>
 
-    <div class="container row">
-        {% for book in books %}
-        <div class="col-sm-6 col-lg-3">
-            <div class="card">
-                <img src="https://cdn.dribbble.com/users/803982/screenshots/2286778/13_-_play_edicola.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">{{book.title}}</h3>
-                    <h6 class="card-subtitle mb-2 text-muted">ISBN: {{book.isbn}}</h6>
-                    <p class="card-text">
-                        Autor: {{book.author}}
-                    </p>
-                    <p class="card-text">
-                        Fecha de Publicación: {{book.publish_date}}
-                    </p>
+<div class="container row">
+    {% for book in books %}
+    <div class="col-sm-6 col-lg-3">
+        <div class="card">
+            <img src="https://cdn.dribbble.com/users/803982/screenshots/2286778/13_-_play_edicola.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h3 class="card-title">{{book.title}}</h3>
+                <h6 class="card-subtitle mb-2 text-muted">ISBN: {{book.isbn}}</h6>
+                <p class="card-text">
+                    Autor: {{book.author}}
+                </p>
+                <p class="card-text">
+                    Fecha de Publicación: {{book.publish_date}}
+                </p>
 
-                    <a screen-name="details" href="/details/{{book.id_book}}" class="btn mt-6">Detalles</a>
-                </div>
+                <a screen-name="details" href="/details/{{book.id_book}}" class="btn mt-6">Detalles</a>
             </div>
         </div>
-        {% endfor %}
-
     </div>
+    {% endfor %}
+
+</div>
 
 {% endblock %}

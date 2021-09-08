@@ -124,7 +124,10 @@ def details(id_book):
     ## Para el detalle
     book = db.execute(f"SELECT * FROM Books WHERE id_book = {id_book}").fetchall()
 
-    return render_template("detail.html", username=username, book=book)
+    reviews = db.execute("SELECT * FROM reviews").fetchall()
+    isset = db.execute(f"SELECT isset FROM reviews WHERE id_user = {id}").fetchall()
+
+    return render_template("detail.html", username=username, book=book, reviews=reviews, isset=isset)
 
 @app.route("/saved")
 @login_required

@@ -1,12 +1,6 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {% block title %} Detalles {% endblock %} {% block main %}
 
-{% block title %}
-    Detalles
-{% endblock %}
-
-{% block main %}
-
-<div class="container">
+<div class="container row">
     <div class="card">
         <div class="row card-body">
             {% for b in book %}
@@ -18,19 +12,44 @@
                 <p>ISBN: {{b.isbn}}</p>
                 <p>Autor: {{b.author}}</p>
                 <p>Fecha de Publicación: {{b.publish_date}}</p>
-                
+
             </div>
-            
+
             {% endfor %}
         </div>
     </div>
 </div>
 
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h1>Reseñas:</h1>
+{% if isset %}
+<div class="container row text-center" style="margin-bottom: 30px;">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-lg-9 col-sm-12">
+                <input name="review" class="form-style" placeholder="Deja tu reseña..." id="review" autocomplete="none">
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <button class="btn">Ingresar</button>
+            </div>
         </div>
     </div>
 </div>
+{% endif %}
+
+<div class="container row">
+    {% for review in reviews %}
+    <div class="col-sm-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Por: {{review.id_user}}</h4>
+                <p class="card-text">
+                    {{review.message}}
+                </p>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
 {% endblock %}
