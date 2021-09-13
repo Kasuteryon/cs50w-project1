@@ -4,21 +4,29 @@ body {
   font-weight: 300;
   font-size: 15px;
   line-height: 1.7;
-  color: #fff;
-  background-color: #2a2b38 !important;
+  color: black;
   overflow-x: hidden;
-  background-image: url(../images/Home.svg);
+  background-color: #121313;
+  background-image: url(../images/SeccionIII.svg) !important;
   background-attachment: fixed;
   background-size: cover;
 }
 
 .card {
-  background-color: #1f2029 !important;
+  background-color: #f0f5ff !important;
   margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+}
+
+.card img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .header {
-  background-color: #2a2b38 !important;
+  background-color: #121313 !important;
+  color: white;
 }
 
 .btn {
@@ -42,23 +50,23 @@ body {
   -ms-flex-pack: center;
   text-align: center;
   border: none;
-  background-color: #0099FF;
+  background-color: #339933;
   color: #fff;
-  -webkit-box-shadow: 0 8px 24px 0 #0099FF;
-          box-shadow: 0 8px 24px 0 #0099FF;
+  -webkit-box-shadow: 0 8px 24px 0 #339933;
+          box-shadow: 0 8px 24px 0 #339933;
 }
 
 .btn:active,
 .btn:focus {
   background-color: #fff;
-  color: #0099FF;
+  color: #339933;
   -webkit-box-shadow: 0 8px 24px 0 rgba(255, 255, 255, 0.2);
           box-shadow: 0 8px 24px 0 rgba(255, 255, 255, 0.2);
 }
 
 .btn:hover {
   background-color: #fff;
-  color: #0099FF;
+  color: #339933;
   -webkit-box-shadow: 0 8px 24px 0 rgba(255, 255, 255, 0.2);
           box-shadow: 0 8px 24px 0 rgba(255, 255, 255, 0.2);
 }
@@ -106,7 +114,7 @@ body {
   font-size: 24px;
   line-height: 48px;
   text-align: left;
-  color: #0099FF;
+  color: #339933;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
 }

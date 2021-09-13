@@ -1,21 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
 
-$base-color: #0099FF;
-$back-color: #2a2b38;
-$card-color: #1f2029;
+//$base-color: #0099FF;
+$base-color: #339933;
+$back-color: #121313;
+//$back-color: linear-gradient(#EDF3FF, #F0F5FF, #E6EFFF);
+
+//$card-color: #1f2029;
+$card-color: #f0f5ff;
+
+$shadow: rgba(136, 172, 243, 0.25) 0px 10px 30px, rgba(0, 0, 0, 0.03) 0px 1px 1px,
+         rgba(47, 62, 96, 0.01) 0px 10px 20px, rgba(76, 102, 148, 0.13) 0px 1px 3px;
 
 body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;
 	font-size: 15px;
 	line-height: 1.7;
-	color: #fff;
-	background-color: $back-color !important;
+	color: black;
 	overflow-x: hidden;
-
-  
-  background-image: url(../images/Home.svg);
+  background-color: $back-color;
+  background-image: url(../images/SeccionIII.svg) !important;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -25,11 +30,19 @@ body{
 .card{
 	
     background-color: $card-color !important;
-	margin-bottom: 20px;
+	  margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    //box-shadow: $shadow;
+    img{
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
 }
 
 .header{
     background-color: $back-color !important;
+    color: white;
 }
 
 .btn{  

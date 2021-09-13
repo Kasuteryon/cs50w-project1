@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
 //$bodycolor: linear-gradient(to right,  #3300FF,#990099, #FF0066);
-$bodycolor: linear-gradient(to right,#0099FF, #0066FF, #0033FF);
-$basecolor: #0066FF;
+//$bodycolor: linear-gradient(to right,#0099FF, #0066FF, #0033FF);
+//$basecolor: #0066FF;
 
+$bodycolor: linear-gradient(to right,#33CC33, #339933 , #336633);
+$basecolor: #339933;
 body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;

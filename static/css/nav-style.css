@@ -2,7 +2,7 @@
 :root {
   --header-height: 3rem;
   --nav-width: 68px;
-  --first-color: #0033FF;
+  --first-color: #339933;
   --first-color-light: #D0D3D4;
   --white-color: #FDFEFE ;
   --z-fixed: 100
@@ -48,7 +48,7 @@ a {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 0 1rem;
-  background-color: var(--white-color);
+  background-color: #f0f5ff;
   z-index: var(--z-fixed);
   -webkit-transition: .5s;
   transition: .5s;
@@ -66,8 +66,8 @@ a {
   left: -30%;
   width: var(--nav-width);
   height: 100vh;
-  background: -webkit-gradient(linear, right top, left top, from(#0066FF), to(#0033FF));
-  background: linear-gradient(to left, #0066FF, #0033FF);
+  background: -webkit-gradient(linear, left top, right top, from(#33CC33), to(#339933));
+  background: linear-gradient(to right, #33CC33, #339933);
   padding: .5rem 1rem 0 0;
   -webkit-transition: .5s;
   transition: .5s;

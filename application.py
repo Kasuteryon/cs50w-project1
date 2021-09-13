@@ -124,12 +124,20 @@ def details(id_book):
     ## Para el detalle
     book = db.execute(f"SELECT * FROM Books WHERE id_book = {id_book}").fetchall()
 
-    reviews = db.execute("SELECT *, users.username FROM reviews INNER JOIN users ON reviews.id_user = users.id_user").fetchall()
-    isset = db.execute(f"SELECT isset FROM reviews WHERE id_user = {id}").fetchall()
+    reviews = db.execute(f"SELECT *, users.username FROM reviews INNER JOIN users ON reviews.id_user = users.id_user WHERE id_book = {id_book}").fetchall()
+    isset = db.execute(f"SELECT id_user FROM reviews WHERE id_user = {id} and id_book = {id_book}").fetchall()
 
-    bandera = False
-    if isset == 1:
+    print("----------")
+    print(len(isset))
+
+     
+    if len(isset) == 1:
+        bandera = False
+    else:
         bandera = True
+    
+    print("----------")
+    print(bandera)
 
     return render_template("detail.html", username=username, book=book, reviews=reviews, bandera=bandera)
 

@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
-$base-color: linear-gradient(to left, #0066FF, #0033FF);
+//$base-color: linear-gradient(to left, #0066FF, #0033FF);
+$base-color: linear-gradient(to right,#33CC33, #339933);
 
 :root {
     --header-height: 3rem;
     --nav-width: 68px;
-    --first-color: #0033FF;
+    --first-color: #339933;
     --first-color-light: #D0D3D4;
     --white-color: #FDFEFE ;
     --z-fixed: 100
@@ -42,7 +43,7 @@ a {
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
-    background-color: var(--white-color);
+    background-color: #f0f5ff;
     z-index: var(--z-fixed);
     transition: .5s
 }
