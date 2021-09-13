@@ -7,25 +7,20 @@
                 placeholder="Titulo..." 
                 id="search" autocomplete="none">
             <i class='bx bx-search input-icon'></i> 
-            <datalist class="form-style" id="books" onchange="location = this.value;">
+            <datalist class="form-style" id="books">
                 {% for book in booksAll %}
-                <option screen-name="details" value="{{book.title}} - {{book.isbn}}">
-                <script>    
-                    $('#search').on('input', function(){
-                    let page = $(this).val();
-                    window.location.href = '/details/{{book.id_book}}' + page;
-                    });
-                </script>
+                <option value="{{book.title}} - {{book.author}} - {{book.isbn}}">
+                    <a></a>
+                </option>
                 {% endfor %}
             </datalist> -->
-        <select class="form-style" id="books" onchange="location = this.value;">
-                <option value="#">Buscar...</option>
-                {% for book in booksAll %}
-                <option screen-name="details" value="/details/{{book.id_book}}">{{book.title}} - {{book.isbn}}</option>
-                {% endfor %}
-            </select>
-
-
+            
+        <select autocomplete="off" class="form-style chosen-select" id="books" onchange="location = this.value;">
+            <option value="#">Buscar...</option>
+            {% for book in booksAll %}
+            <option screen-name="details" value="/details/{{book.id_book}}">{{book.title}} - {{book.isbn}}</option>
+            {% endfor %}
+        </select>
     </div>
 </div>
 
@@ -53,3 +48,4 @@
 </div>
 
 {% endblock %}
+

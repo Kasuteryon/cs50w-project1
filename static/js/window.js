@@ -1,7 +1,9 @@
+$(".chosen-select").chosen({no_results_text: "No se encuentran registros..."}); 
+
 $(document).ready(function($) {
     $(document).find('.screen_data').load("../templates/index.html");
 
-    $(document).on('click', function(event) {
+    $(document).on('click', '.btn_menu', function(event) {
         event.preventDefault();
 
         var screen_name = $(this).attr('screen_name');
@@ -19,3 +21,4 @@ $(document).ready(function($) {
     });
 
 });
+
