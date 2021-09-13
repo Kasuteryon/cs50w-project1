@@ -12,8 +12,6 @@ $(document).ready(function($) {
 
         if (screen_name == "home") {
             $(document).find('.screen_data').load("../templates/index.html");
-        } else if (screen_name == "saved") {
-            $(document).find('.screen_data').load("../templates/saved.html");
         } else if (screen_name == "details") {
             $(document).find('.screen_data').load("../templates/detail.html");
         }

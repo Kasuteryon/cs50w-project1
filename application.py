@@ -2,7 +2,7 @@ import os
 import re
 from dotenv import load_dotenv
 
-from flask import Flask, session, render_template, redirect, url_for, request, flash
+from flask import Flask, session, render_template, redirect, url_for, request, flash, jsonify
 from flask.wrappers import Request
 from flask_session import Session
 from sqlalchemy import create_engine
@@ -141,13 +141,28 @@ def details(id_book):
 
     return render_template("detail.html", username=username, book=book, reviews=reviews, bandera=bandera)
 
-@app.route("/saved")
+@app.route("/api/<string:isbn>")
 @login_required
-def saved():
+def api(isbn):
 
-    id = session["user_id"] 
+    # API OUTPUT
+    books = db.execute(f"SELECT * FROM books WHERE isbn = '{isbn}'").fetchone()
 
-    values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
-    username = values[0]['username']
+    if books is None:
+            return jsonify({"error": "ISBN INVALIDO"}), 404
 
-    return render_template("saved.html", username=username)
+    if books.score == 0 and books.review == 0:
+        average = 0
+    else:
+        average = books.score / books.review
+    #print("--------")
+    #print(books.isbn)
+
+    return jsonify({
+        "title": books.title,
+        "author": books.author,
+        "year": books.publish_date,
+        "isbn": books.isbn,
+        "review_count": books.review,
+        "average_score": average
+    })
