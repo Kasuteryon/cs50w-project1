@@ -15,7 +15,7 @@
                 {% endfor %}
             </datalist> -->
             
-        <select autocomplete="off" class="form-style chosen-select" id="books" onchange="location = this.value;">
+        <select autocomplete="off" class="chosen-select form-style" style=" width: 450px;" id="books" onchange="location = this.value;">
             <option value="#">Buscar...</option>
             {% for book in booksAll %}
             <option screen-name="details" value="/details/{{book.id_book}}">{{book.title}} - {{book.isbn}}</option>

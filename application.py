@@ -1,7 +1,6 @@
 import os
-import re
+import requests
 from dotenv import load_dotenv
-
 from flask import Flask, session, render_template, redirect, url_for, request, flash, jsonify
 from flask.wrappers import Request
 from flask_session import Session
@@ -128,7 +127,10 @@ def details(id_book):
     isset = db.execute(f"SELECT id_user FROM reviews WHERE id_user = {id} and id_book = {id_book}").fetchall()
 
     print("----------")
-    print(len(isset))
+    #print(len(isset))
+    
+    response = requests.get("https://www.googleapis.com/books/v1/volumes?q=isbn:"+ book[0]["isbn"]).json()
+    print(response)
 
      
     if len(isset) == 1:
