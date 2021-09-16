@@ -25,21 +25,21 @@
 </div>
 
 <div class="container row">
-    {% for book in books %}
+    {% for item in items %}
     <div class="col-sm-6 col-lg-3">
         <div class="card">
-            <img src="{{book.image}}" class="card-img-top" alt="...">
+            <img src="{{item[5]["image"]}}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h3 class="card-title">{{book.title}}</h3>
-                <h6 class="card-subtitle mb-2 text-muted">ISBN: {{book.isbn}}</h6>
+                <h3 class="card-title">{{item[0]["title"]}}</h3>
+                <h6 class="card-subtitle mb-2 text-muted">ISBN: {{item[1]["isbn"]}}</h6>
                 <p class="card-text">
-                    Autor: {{book.author}}
+                    Author: {{item[2]["author"]}}
                 </p>
                 <p class="card-text">
-                    Fecha de Publicación: {{book.publish_date}}
+                    Fecha de Publicación: {{item[3]["date"]}}
                 </p>
 
-                <a screen-name="details" href="/details/{{book.id_book}}" class="btn mt-6">Detalles</a>
+                <a screen-name="details" href="/details/{{item[4]["id"]}}" class="btn mt-6">Detalles</a>
             </div>
         </div>
     </div>

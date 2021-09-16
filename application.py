@@ -45,26 +45,33 @@ def index():
     books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 16").fetchall()
     booksAll = db.execute("SELECT * FROM Books ORDER BY title ").fetchall()
 
-    responses = []
-
-    images = []
+    items =  []
+    dicto = {}
 
     print("_-------------------------")
 
     for book in books:
-        responses.append(requests.get("https://www.googleapis.com/books/v1/volumes?q=isbn:"+ book.isbn).json())
+        responses = requests.get("https://www.googleapis.com/books/v1/volumes?q=isbn:"+ book.isbn).json()
 
-        if responses[0]["totalItems"] != 0:
-            images.append(responses[0]["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"])
+        if responses["totalItems"] != 0:
+           image = responses["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
         else:
-            images.append("https://assets.cdnelnuevodiario.com/news/79306a02a99011e593920eb04a1bba78.jpg")
-
+            image = "https://imagenes.elpais.com/resizer/EkPGHGt1AYBU6-FFuStAwC_NKSw=/1960x0/arc-anglerfish-eu-central-1-prod-prisa.s3.amazonaws.com/public/YC5XJK5X2DES4MGR2W3HWWS7JU.jpg"
     
-    print(images)
+        
+        dicto = ({"title":book.title},
+        {"isbn":book.isbn},
+        {"author":book.author},
+        {"date":book.publish_date},
+        {"id":book.id_book},
+        {"image": image})
+
+        items.append(dicto)
+
     # print(query.paginate(page=page, per_page=items))
     #books.query.paginate()
     #print(books)
-    return render_template("index.html", username=username, books=books, booksAll=booksAll, images=images)
+    return render_template("index.html", username=username, books=books, booksAll=booksAll, items=items)
 
 @app.route("/login", methods=["GET", "POST"])  
 def login():
