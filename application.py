@@ -9,6 +9,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from tempfile import mkdtemp
 from helpers import login_required
 from werkzeug.security import check_password_hash, generate_password_hash
+import json
 
 app = Flask(__name__)
 
@@ -36,21 +37,34 @@ db = scoped_session(sessionmaker(bind=engine))
 @login_required
 def index():
 
-    items = 20
     id = session.get("user_id")
     
     values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
     username = values[0]['username']
 
-    page = request.args.get('page', 1, type=int)
-
     books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 16").fetchall()
     booksAll = db.execute("SELECT * FROM Books ORDER BY title ").fetchall()
 
+    responses = []
+
+    images = []
+
+    print("_-------------------------")
+
+    for book in books:
+        responses.append(requests.get("https://www.googleapis.com/books/v1/volumes?q=isbn:"+ book.isbn).json())
+
+        if responses[0]["totalItems"] != 0:
+            images.append(responses[0]["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"])
+        else:
+            images.append("https://assets.cdnelnuevodiario.com/news/79306a02a99011e593920eb04a1bba78.jpg")
+
+    
+    print(images)
     # print(query.paginate(page=page, per_page=items))
     #books.query.paginate()
     #print(books)
-    return render_template("index.html", username=username, books=books, booksAll=booksAll)
+    return render_template("index.html", username=username, books=books, booksAll=booksAll, images=images)
 
 @app.route("/login", methods=["GET", "POST"])  
 def login():
@@ -121,18 +135,37 @@ def details(id_book):
     username = values[0]['username']
 
     ## Para el detalle
-    book = db.execute(f"SELECT * FROM Books WHERE id_book = {id_book}").fetchall()
+    book = db.execute(f"SELECT * FROM Books WHERE id_book = {id_book}").fetchone()
 
     reviews = db.execute(f"SELECT *, users.username FROM reviews INNER JOIN users ON reviews.id_user = users.id_user WHERE id_book = {id_book}").fetchall()
     isset = db.execute(f"SELECT id_user FROM reviews WHERE id_user = {id} and id_book = {id_book}").fetchall()
 
-    print("----------")
+    print("--------------------------------------")
     #print(len(isset))
     
-    response = requests.get("https://www.googleapis.com/books/v1/volumes?q=isbn:"+ book[0]["isbn"]).json()
-    print(response)
+    response = requests.get("https://www.googleapis.com/books/v1/volumes?q=isbn:"+ book.isbn).json()
 
-     
+    # el .json() fue aplicado  ya UWU
+    #print(response["items"][0]["volumeInfo"]["description"])
+    itemsApi = []
+    itemsApi.append({"title": book.title})
+    itemsApi.append({"isbn": book.isbn})
+    itemsApi.append({"author": book.author})
+    itemsApi.append({"publish_date": book.publish_date})
+
+    if response["totalItems"] != 0:
+        itemsApi.append({"description":response["items"][0]["volumeInfo"]["description"]})
+        itemsApi.append({"averageRating":response["items"][0]["volumeInfo"]["averageRating"]})
+        itemsApi.append({"ratingsCount":response["items"][0]["volumeInfo"]["ratingsCount"]})
+        itemsApi.append({"categories":response["items"][0]["volumeInfo"]["categories"][0]})
+        itemsApi.append({"image":response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]})
+    else:
+        itemsApi.append({"description":"Wasn't found on Google Book's API"})
+        itemsApi.append({"averageRating":"Wasn't found on Google Book's API"})
+        itemsApi.append({"ratingsCount":"Wasn't found on Google Book's API"})
+        itemsApi.append({"categories":"Wasn't found on Google Book's API"})
+        itemsApi.append({"image":"https://imagenes.elpais.com/resizer/EkPGHGt1AYBU6-FFuStAwC_NKSw=/1960x0/arc-anglerfish-eu-central-1-prod-prisa.s3.amazonaws.com/public/YC5XJK5X2DES4MGR2W3HWWS7JU.jpg"})
+
     if len(isset) == 1:
         bandera = False
     else:
@@ -141,7 +174,7 @@ def details(id_book):
     print("----------")
     print(bandera)
 
-    return render_template("detail.html", username=username, book=book, reviews=reviews, bandera=bandera)
+    return render_template("detail.html", username=username, reviews=reviews, bandera=bandera, items=itemsApi)
 
 @app.route("/api/<string:isbn>")
 @login_required
@@ -168,3 +201,4 @@ def api(isbn):
         "review_count": books.review,
         "average_score": average
     })
+

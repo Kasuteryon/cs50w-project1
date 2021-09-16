@@ -1,21 +1,40 @@
 {% extends "layout.html" %} {% block title %} Detalles {% endblock %} {% block main %}
 
-<div class="container row">
-    <div class="card">
-        <div class="row card-body">
-            {% for b in book %}
-            <div class="col-6">
-                <h1>Título:</h1>
-                <h3>{{b.title}}</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-sm-12 col-md-6">
+            <div class="card">
+                <img class="card-img-top" src="{{items[8]["image"]}}" alt="Book">
+                <div class="card-body">
+                    <h2 class="card-title">Title:</h2>
+                    <p>{{items[0]["title"]}}</p>
+                    <h4>Category: </h4>
+                    <p>{{items[7]["categories"]}}</p>
+                </div>
             </div>
-            <div class="col-6">
-                <p id="isbn">ISBN: {{b.isbn}}</p>
-                <p>Autor: {{b.author}}</p>
-                <p>Fecha de Publicación: {{b.publish_date}}</p>
+        </div>
+        <div class="col-lg-8 col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5>ISBN: </h5>
+                <p id="isbn">{{items[1]["isbn"]}}</p>
 
+                <h5>Author: </h5>
+                <p>{{items[2]["author"]}}</p>
+
+                <h5>Publish Date:</h5>
+                <p>{{items[3]["publish_date"]}}</p>
+
+                <h5>Description: </h5>
+                <p>{{items[4]["description"]}}</p>
+
+                <h5>Average Rating: </h5>
+                <p>{{items[5]["averageRating"]}}</p>
+
+                <h5>Ratings Count: </h5>
+                <p>{{items[6]["ratingsCount"]}}</p>
+                </div>
             </div>
-
-            {% endfor %}
         </div>
     </div>
 </div>

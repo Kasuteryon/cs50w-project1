@@ -18,7 +18,7 @@
         <select autocomplete="off" class="chosen-select form-style" style=" width: 450px;" id="books" onchange="location = this.value;">
             <option value="#">Buscar...</option>
             {% for book in booksAll %}
-            <option screen-name="details" value="/details/{{book.id_book}}">{{book.title}} - {{book.isbn}}</option>
+            <option screen-name="details" value="/details/{{book.id_book}}">{{book.title}} - {{book.author}} - {{book.isbn}}</option>
             {% endfor %}
         </select>
     </div>
@@ -28,7 +28,7 @@
     {% for book in books %}
     <div class="col-sm-6 col-lg-3">
         <div class="card">
-            <img src="https://assets.cdnelnuevodiario.com/news/79306a02a99011e593920eb04a1bba78.jpg" class="card-img-top" alt="...">
+            <img src="{{book.image}}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h3 class="card-title">{{book.title}}</h3>
                 <h6 class="card-subtitle mb-2 text-muted">ISBN: {{book.isbn}}</h6>
