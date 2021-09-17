@@ -132,7 +132,7 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-@app.route("/details/<int:id_book>")
+@app.route("/details/<int:id_book>", methods=["GET", "POST"])
 @login_required
 def details(id_book):
 
@@ -141,6 +141,10 @@ def details(id_book):
     values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
     username = values[0]['username']
 
+    if request.method == "POST":
+        db.execute("INSERT INTO reviews(id_user, id_book, isset, message, stars) VALUES(:id_user, :id_book, :isset, :review, :stars)",
+         {"id_user":id,"id_book":id_book,"review":request.form.get("review"),"isset":1, "stars":request.form.get("stars")}) 
+        db.commit()
     ## Para el detalle
     book = db.execute(f"SELECT * FROM Books WHERE id_book = {id_book}").fetchone()
 
@@ -155,6 +159,7 @@ def details(id_book):
     # el .json() fue aplicado  ya UWU
     #print(response["items"][0]["volumeInfo"]["description"])
     itemsApi = []
+    
     itemsApi.append({"title": book.title})
     itemsApi.append({"isbn": book.isbn})
     itemsApi.append({"author": book.author})

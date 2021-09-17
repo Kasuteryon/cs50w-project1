@@ -42,14 +42,20 @@
 {% if bandera %}
 <div class="container row text-center" style="margin-bottom: 30px;">
     <div class="form-group">
-        <div class="row">
-            <div class="col-lg-9 col-sm-12">
-                <input name="review" class="form-style" placeholder="Deja tu reseña..." id="review" autocomplete="none">
-            </div>
-            <div class="col-lg-3 col-sm-12">
-                <button class="btn">Ingresar</button>
-            </div>
-        </div>
+        
+        <form method="POST">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <input autocomplete="off" name="review" class="form-style" placeholder="Deja tu reseña..." id="review" autocomplete="none">
+                </div>
+                <div class="col-lg-3 col-sm-12">
+                    <input autocomplete="off" name="stars" type="number" max="5" min="0" class="form-style" placeholder="Del 1 al 5..." id="review" autocomplete="none">
+                </div>
+                <div class="col-lg-3 col-sm-12">
+                    <button class="btn">Ingresar</button>
+                </div>
+            </div>     
+        </form>
     </div>
 </div>
 {% endif %}
@@ -60,6 +66,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Por: {{review.username}}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{review.stars}}/5.0</h6>
                 <p class="card-text">
                     {{review.message}}
                 </p>

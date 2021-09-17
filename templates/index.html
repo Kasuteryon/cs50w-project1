@@ -1,19 +1,6 @@
 {% extends "layout.html" %} {% block title %} Inicio {% endblock %} {% block main %}
 <div class="container row text-center" style="margin-bottom: 30px;">
     <div class="form-group">
-
-        <!--<input list="books" name="search" 
-                class="form-style" 
-                placeholder="Titulo..." 
-                id="search" autocomplete="none">
-            <i class='bx bx-search input-icon'></i> 
-            <datalist class="form-style" id="books">
-                {% for book in booksAll %}
-                <option value="{{book.title}} - {{book.author}} - {{book.isbn}}">
-                    <a></a>
-                </option>
-                {% endfor %}
-            </datalist> -->
             
         <select autocomplete="off" class="chosen-select form-style" style=" width: 450px;" id="books" onchange="location = this.value;">
             <option value="#">Buscar...</option>
