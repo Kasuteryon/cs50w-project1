@@ -3,8 +3,8 @@
 
 //$base-color: #0099FF;
 $base-color: #339933;
-$back-color: #121313;
-//$back-color: linear-gradient(#EDF3FF, #F0F5FF, #E6EFFF);
+//$back-color: #121313;
+$back-color: linear-gradient(#EDF3FF, #F0F5FF, #E6EFFF);
 
 //$card-color: #1f2029;
 $card-color: #f0f5ff;
@@ -19,7 +19,7 @@ body{
 	line-height: 1.7;
 	color: black;
 	overflow-x: hidden;
-  background-color: $back-color;
+  background-color: $card-color !important;
   background-image: url(../images/SeccionIII.svg) !important;
   background-attachment: fixed;
   background-size: cover;
@@ -33,7 +33,7 @@ body{
 	  margin-bottom: 20px;
     border: none;
     border-radius: 10px;
-    //box-shadow: $shadow;
+    box-shadow: $shadow;
     img{
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
@@ -121,7 +121,7 @@ body{
 .chosen-single, .chosen-drop, .chosen-with-drop, .chosen-container-active, .chosen-container-single, .chosen-container
 .chosen-search, .chosen-results, .chosen-search-input, .no-results{
   color: #c4c3ca !important;
-  background-color: #1f2029 !important;
+  background-color: #2a2b38 !important;
   font-weight: 500 !important;
   width: 450px !important;
   border-radius: 4px !important;

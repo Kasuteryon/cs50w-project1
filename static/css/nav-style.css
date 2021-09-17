@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 :root {
   --header-height: 3rem;
-  --nav-width: 68px;
+  --nav-width: 78px;
   --first-color: #339933;
   --first-color-light: #D0D3D4;
   --white-color: #FDFEFE ;
@@ -52,6 +52,7 @@ a {
   z-index: var(--z-fixed);
   -webkit-transition: .5s;
   transition: .5s;
+  color: #2a2b38;
 }
 
 .header_toggle {
@@ -66,8 +67,7 @@ a {
   left: -30%;
   width: var(--nav-width);
   height: 100vh;
-  background: -webkit-gradient(linear, left top, right top, from(#33CC33), to(#339933));
-  background: linear-gradient(to right, #33CC33, #339933);
+  background: #2a2b38;
   padding: .5rem 1rem 0 0;
   -webkit-transition: .5s;
   transition: .5s;
@@ -87,6 +87,7 @@ a {
       -ms-flex-pack: justify;
           justify-content: space-between;
   overflow: hidden;
+  padding: 10px;
 }
 
 .nav_logo,
