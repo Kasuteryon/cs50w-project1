@@ -24,7 +24,7 @@ if not os.getenv("DB_URL"):
 
 # Configure session to use filesystem
 app.config["SESSION_FILE_DIR"] = mkdtemp()
-app.config["SESSION_PERMANENT"] = True
+# app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
