@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 load_dotenv("./env")
 FLASK_APP = os.getenv("FLASK_APP")
-DATABASE_URL = os.getenv("DB_URL")
+DB_URL = os.getenv("DB_URL")
 FLASK_DEBUG = os.getenv("FLASK_DEBUG")
 
 # Check for environment variable
@@ -29,7 +29,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-engine = create_engine(os.getenv("DATABASE_URL"))
+engine = create_engine(os.getenv("DB_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
 
