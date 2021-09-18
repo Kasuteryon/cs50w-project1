@@ -42,7 +42,7 @@ def index():
     values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
     username = values[0]['username']
 
-    books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 16").fetchall()
+    books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 8").fetchall()
     booksAll = db.execute("SELECT * FROM Books ORDER BY title ").fetchall()
 
     items =  []
@@ -78,30 +78,30 @@ def login():
 
     session.clear()
 
+    error = None
     if request.method == 'POST':
    
         logemail = request.form.get("logemail")
         # rows = db.execute(f"SELECT COUNT(username) FROM users WHERE email = '{logemail}'").fetchall()
         values = db.execute(f"SELECT * FROM users WHERE email = '{logemail}'").fetchall()
         
-
+        
         #hashpass = request.form.get("logpass")
-        check = check_password_hash(values[0]['hash'], request.form.get("logpass"))
+        #check = check_password_hash(values[0]['hash'], request.form.get("logpass"))
 
-        if len(values) != 1 or check == False:
+        if len(values) != 1 or check_password_hash(values[0]['hash'], request.form.get("logpass")) == False:
 
           # Remember which user has logged in
-                
-            return redirect("/login")
+            error = True
+            ##return redirect("/login")
         else:
             session["user_id"] = values[0]["id_user"]
                 # Redirect user to home page
-            username = values[0]['username']
-
             #return render_template("index.html", username=username)
             return redirect("/")
+            
 
-    return render_template("login.html")
+    return render_template("login.html", error=error)
     
 
 @app.route("/register", methods=["GET", "POST"])

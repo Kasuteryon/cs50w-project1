@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./static/css/login-style.css">
 </head>
 
-<body>
+<body>			
     <div class="section">
 		<div class="container">
 		    <div class="row full-height justify-content-center">
@@ -100,5 +100,19 @@
 	      	</div>
 	    </div>
 	</div>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="sweetalert2.all.min.js"></script>
+
+	{% if error %}
+    <script>
+        Swal.fire({
+            position: 'center',
+        	icon: 'error',
+            text: "Credenciales Inválidas",
+            showConfirmButton: true,
+            timer: 5000
+        })
+    </script>
+    {% endif %}
 </body>
 </html>

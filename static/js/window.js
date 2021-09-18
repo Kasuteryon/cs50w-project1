@@ -1,3 +1,4 @@
+
 $(".chosen-select").chosen({no_results_text: "No se encuentran registros..."}); 
 
 $(document).ready(function($) {
