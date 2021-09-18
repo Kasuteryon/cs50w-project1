@@ -214,3 +214,5 @@ def api(isbn):
         "average_score": average
     })
 
+if __name__ == "main":
+    app.run()
