@@ -15,12 +15,12 @@ app = Flask(__name__)
 
 load_dotenv("./env")
 FLASK_APP = os.getenv("FLASK_APP")
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DB_URL")
 FLASK_DEBUG = os.getenv("FLASK_DEBUG")
 
 # Check for environment variable
-if not os.getenv("DATABASE_URL"):
-    raise RuntimeError("DATABASE_URL is not set")
+if not os.getenv("DB_URL"):
+    raise RuntimeError("DB_URL is not set")
 
 # Configure session to use filesystem
 app.config["SESSION_FILE_DIR"] = mkdtemp()
