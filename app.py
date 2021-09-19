@@ -56,7 +56,10 @@ def index():
         responses = requests.get("https://www.googleapis.com/books/v1/volumes?q=isbn:"+ book.isbn).json()
 
         if responses["totalItems"] != 0:
-           image = responses["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
+            if responses["items"][0]["volumeInfo"]["imageLinks"] is "":
+                image = "https://imagenes.elpais.com/resizer/EkPGHGt1AYBU6-FFuStAwC_NKSw=/1960x0/arc-anglerfish-eu-central-1-prod-prisa.s3.amazonaws.com/public/YC5XJK5X2DES4MGR2W3HWWS7JU.jpg"
+            else:
+                image = responses["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
         else:
             image = "https://imagenes.elpais.com/resizer/EkPGHGt1AYBU6-FFuStAwC_NKSw=/1960x0/arc-anglerfish-eu-central-1-prod-prisa.s3.amazonaws.com/public/YC5XJK5X2DES4MGR2W3HWWS7JU.jpg"
     
