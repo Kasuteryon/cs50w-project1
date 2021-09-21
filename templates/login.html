@@ -103,16 +103,58 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="sweetalert2.all.min.js"></script>
 
-	{% if error %}
+	{% if error1 %}
     <script>
         Swal.fire({
             position: 'center',
         	icon: 'error',
             text: "Credenciales Inválidas",
             showConfirmButton: true,
-            timer: 5000
+            //timer: 5000,
+			backdrop: `
+			url("../static/images/nyan-cat.gif")
+			left top
+			no-repeat
+  `
         })
     </script>
+	
+    {% endif %}
+
+	{% if error2 %}
+    <script>
+        Swal.fire({
+            position: 'center',
+        	icon: 'error',
+            text: "Cuenta Existente",
+            showConfirmButton: true,
+            //timer: 5000,
+			backdrop: `
+			url("../static/images/nyan-cat.gif")
+			left top
+			no-repeat
+  `
+        })
+    </script>
+	
+    {% endif %}
+
+	{% if error3 %}
+    <script>
+        Swal.fire({
+            position: 'center',
+        	icon: 'error',
+            text: "Nombre de Usuario Existente",
+            showConfirmButton: true,
+            //timer: 5000,
+			backdrop: `
+			url("../static/images/nyan-cat.gif")
+			left top
+			no-repeat
+  `
+        })
+    </script>
+	
     {% endif %}
 </body>
 </html>

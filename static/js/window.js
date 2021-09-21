@@ -23,3 +23,18 @@ $(document).ready(function($) {
 
 });
 
+let comment = document.getElementById('review')
+    let star = document.getElementById('review2')
+    let btnEnviar = document.getElementById('send')
+
+    btnEnviar.disabled = true
+    console.log(comment.value.length)
+
+    verificar = ()=> {
+        if (comment.value.length > 10 && star.value.length === 1){
+            
+            btnEnviar.disabled = false;
+        }else{
+            btnEnviar.disabled = true
+        }
+    };

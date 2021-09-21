@@ -46,13 +46,13 @@
         <form method="POST">
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
-                    <input autocomplete="off" name="review" class="form-style" placeholder="Deja tu reseña..." id="review" autocomplete="none">
+                    <input autocomplete="off" required name="review" onkeyup="verificar(this.value);" class="form-style" placeholder="Deja tu reseña..." id="review" autocomplete="none">
                 </div>
                 <div class="col-lg-3 col-sm-12">
-                    <input autocomplete="off" name="stars" type="number" max="5" min="0" class="form-style" placeholder="Del 1 al 5..." id="review" autocomplete="none">
+                    <input autocomplete="off" required step="1" oninput="validity.valid||(value='');" onkeyup="verificar(this.value);" name="stars" type="number" max="5" min="0" class="form-style" placeholder="Del 1 al 5..." id="review2" autocomplete="none">
                 </div>
                 <div class="col-lg-3 col-sm-12">
-                    <button class="btn">Ingresar</button>
+                    <button class="btn" id="send">Ingresar</button>
                 </div>
             </div>     
         </form>
@@ -77,5 +77,6 @@
     {% endfor %}
 
 </div>
+
 
 {% endblock %}

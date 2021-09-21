@@ -44,7 +44,7 @@ def index():
     values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
     username = values[0]['username']
 
-    books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 8").fetchall()
+    books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 16").fetchall()
     booksAll = db.execute("SELECT * FROM Books ORDER BY title ").fetchall()
 
     items =  []
@@ -56,10 +56,11 @@ def index():
         responses = requests.get("https://www.googleapis.com/books/v1/volumes?q=isbn:"+ book.isbn).json()
 
         if responses["totalItems"] != 0:
-            if responses["items"][0]["volumeInfo"]["imageLinks"] is "":
-                image = "https://imagenes.elpais.com/resizer/EkPGHGt1AYBU6-FFuStAwC_NKSw=/1960x0/arc-anglerfish-eu-central-1-prod-prisa.s3.amazonaws.com/public/YC5XJK5X2DES4MGR2W3HWWS7JU.jpg"
-            else:
+            if "imageLinks" in responses["items"][0]["volumeInfo"]:
                 image = responses["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
+            
+            else:
+                image = "https://imagenes.elpais.com/resizer/EkPGHGt1AYBU6-FFuStAwC_NKSw=/1960x0/arc-anglerfish-eu-central-1-prod-prisa.s3.amazonaws.com/public/YC5XJK5X2DES4MGR2W3HWWS7JU.jpg"
         else:
             image = "https://imagenes.elpais.com/resizer/EkPGHGt1AYBU6-FFuStAwC_NKSw=/1960x0/arc-anglerfish-eu-central-1-prod-prisa.s3.amazonaws.com/public/YC5XJK5X2DES4MGR2W3HWWS7JU.jpg"
     
@@ -83,7 +84,7 @@ def login():
 
     session.clear()
 
-    error = None
+    error1 = None
     if request.method == 'POST':
    
         logemail = request.form.get("logemail")
@@ -97,7 +98,7 @@ def login():
         if len(values) != 1 or check_password_hash(values[0]['hash'], request.form.get("logpass")) == False:
 
           # Remember which user has logged in
-            error = True
+            error1= True
             ##return redirect("/login")
         else:
             session["user_id"] = values[0]["id_user"]
@@ -106,18 +107,23 @@ def login():
             return redirect("/")
             
 
-    return render_template("login.html", error=error)
+    return render_template("login.html", error1=error1)
     
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
+    error2 = None
+    error3 = None
     if request.method == "POST":
         logemail=request.form.get("logemail2")
-                    
+            
         rows = db.execute(f"SELECT COUNT(username) FROM users WHERE email = '{logemail}'").fetchall()
-                    
-        if rows[0][0] == 0:
+        rows2 = rows = db.execute(f"SELECT COUNT(username) FROM users").fetchall()
+
+        if rows2[0][0] != 0:
+            error3 = True
+        elif rows[0][0] == 0:
             logname = (request.form.get("logname2"))
             logpass = generate_password_hash(request.form.get("logpass2"))
                         
@@ -125,8 +131,10 @@ def register():
 
             db.commit()
             return redirect("/login")
+        else:
+            error2 = True
 
-    return render_template("login.html")
+    return render_template("login.html", error2=error2, error3=error3)
 
 @app.route("/logout")
 def logout():
@@ -171,11 +179,31 @@ def details(id_book):
     itemsApi.append({"publish_date": book.publish_date})
 
     if response["totalItems"] != 0:
-        itemsApi.append({"description":response["items"][0]["volumeInfo"]["description"]})
-        itemsApi.append({"averageRating":response["items"][0]["volumeInfo"]["averageRating"]})
-        itemsApi.append({"ratingsCount":response["items"][0]["volumeInfo"]["ratingsCount"]})
-        itemsApi.append({"categories":response["items"][0]["volumeInfo"]["categories"][0]})
-        itemsApi.append({"image":response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]})
+        if "description" in response["items"][0]["volumeInfo"]:
+            itemsApi.append({"description":response["items"][0]["volumeInfo"]["description"]})
+        else:
+            itemsApi.append({"description":"Wasn't found on Google Book's API"})
+
+        if "averageRating" in response["items"][0]["volumeInfo"]:
+            itemsApi.append({"averageRating":response["items"][0]["volumeInfo"]["averageRating"]})
+        else:
+            itemsApi.append({"averageRating":"Wasn't found on Google Book's API"})
+
+        if "ratingsCount" in response["items"][0]["volumeInfo"]:
+            itemsApi.append({"ratingsCount":response["items"][0]["volumeInfo"]["ratingsCount"]})
+        else:
+            itemsApi.append({"ratingsCount":"Wasn't found on Google Book's API"})
+
+        if "categories" in response["items"][0]["volumeInfo"]:
+            itemsApi.append({"categories":response["items"][0]["volumeInfo"]["categories"][0]})
+        else:
+            itemsApi.append({"categories":"Wasn't found on Google Book's API"})
+        
+        if "imageLinks" in response["items"][0]["volumeInfo"]:
+            itemsApi.append({"image":response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]})
+            
+        else:
+            itemsApi.append({"image":"https://imagenes.elpais.com/resizer/EkPGHGt1AYBU6-FFuStAwC_NKSw=/1960x0/arc-anglerfish-eu-central-1-prod-prisa.s3.amazonaws.com/public/YC5XJK5X2DES4MGR2W3HWWS7JU.jpg"})
     else:
         itemsApi.append({"description":"Wasn't found on Google Book's API"})
         itemsApi.append({"averageRating":"Wasn't found on Google Book's API"})
