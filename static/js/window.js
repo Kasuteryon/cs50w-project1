@@ -1,6 +1,15 @@
 
 $(".chosen-select").chosen({no_results_text: "No se encuentran registros..."}); 
 
+// Chosen touch support.
+if ($('.chosen-container').length > 0) {
+    $('.chosen-container').on('touchstart', function(e){
+      e.stopPropagation(); e.preventDefault();
+      // Trigger the mousedown event.
+      $(this).trigger('mousedown');
+    });
+  }
+
 $(document).ready(function($) {
     $(document).find('.screen_data').load("../templates/index.html");
 

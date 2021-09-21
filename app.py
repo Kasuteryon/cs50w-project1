@@ -44,7 +44,7 @@ def index():
     values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
     username = values[0]['username']
 
-    books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 16").fetchall()
+    books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 8").fetchall()
     booksAll = db.execute("SELECT * FROM Books ORDER BY title ").fetchall()
 
     items =  []

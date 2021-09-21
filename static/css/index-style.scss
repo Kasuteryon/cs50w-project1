@@ -117,7 +117,7 @@ body{
 }
 
 .chosen-single, .chosen-drop, .chosen-with-drop, .chosen-container-active, .chosen-container-single, .chosen-container
-.chosen-search, .chosen-results, .chosen-search-input, .no-results{
+.chosen-results, .chosen-search-input, .no-results{
   color: #c4c3ca !important;
   background-color: #2a2b38 !important;
   font-weight: 500 !important;
@@ -134,6 +134,11 @@ body{
 
 .chosen-single{
   background: none !important;
+}
+.chosen-search{
+  input{
+    color: white !important;
+  }
 }
 
 .chosen-container{
