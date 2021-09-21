@@ -7,7 +7,8 @@
     <title>Entrar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
-    <link rel="stylesheet" href="./static/css/login-style.css">
+    <link rel="stylesheet" href="../static/css/login-style.css">
+	<link rel="stylesheet" href="../static/css/animations.css">
 </head>
 
 <body>			
@@ -15,7 +16,7 @@
 		<div class="container">
 		    <div class="row full-height justify-content-center">
 				<div class="col-12 text-center align-self-center py-5">
-					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+					<div class="section pb-5 pt-5 pt-sm-2 text-center headerA show-on-scroll">
 						<h6 class="mb-0 pb-3"><span>Inicia Sesión</span><span>Regístrate</span></h6>
 			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
 			          	<label for="reg-log"></label>
@@ -43,13 +44,19 @@
 													id="logpass" autocomplete="none">
 													<i class="input-icon uil uil-lock-alt"></i>
 												</div>
-												<button name="login" value="login" class="btn mt-4">Entrar</button>
+
+												<div class="d-grid gap-2">
+													<button name="login" value="login" class="btn mt-4">Entrar</button>
+												</div>
+												
 												
 											</form>
 
 				      					</div>
 			      					</div>
 			      				</div>
+
+
 								<div class="card-back">
 									<div class="center-wrap">
 										<div class="section text-center">
@@ -87,7 +94,10 @@
 													autocomplete="none">
 													<i class="input-icon uil uil-lock-alt"></i>
 												</div>
-												<button name="register" value="register" class="btn mt-4">Regístrame</button>
+												<div class="d-grid gap-2" style="margin-top: 10px">
+													<button name="register" value="register" class="btn">Regístrame</button>
+												</div>
+												
 											</form>
 
 				      					</div>
@@ -156,5 +166,6 @@
     </script>
 	
     {% endif %}
+	<script src="../static/js/animations.js"></script>
 </body>
 </html>

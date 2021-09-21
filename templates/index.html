@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block title %} Inicio {% endblock %} {% block main %}
 
-<div class="container row text-center" style="margin-bottom: 30px;">
+<div class="container row text-center headerA show-on-scroll" style="margin-bottom: 30px;">
     <div class="form-group">
             
         <select autocomplete="off" class="chosen-select form-style" style=" width: 450px;" id="books" onchange="location = this.value;">
@@ -15,9 +15,9 @@
 <div class="container row">
     {% for item in items %}
     <div class="col-sm-6 col-lg-3">
-        <div class="card">
+        <div class="card animated fadeInDown show-on-scroll">
             <img src="{{item[5]["image"]}}" class="card-img-top" alt="...">
-            <div class="card-body">
+            <div class="card-body headerA show-on-scroll">
                 <h3 class="card-title">{{item[0]["title"]}}</h3>
                 <h6 class="card-subtitle mb-2 text-muted">ISBN: {{item[1]["isbn"]}}</h6>
                 <p class="card-text">
@@ -26,8 +26,11 @@
                 <p class="card-text">
                     Fecha de Publicación: {{item[3]["date"]}}
                 </p>
-
-                <a screen-name="details" href="/details/{{item[4]["id"]}}" class="btn mt-6">Detalles</a>
+                
+                <div class="d-grid gap-2">
+                    <a screen-name="details" href="/details/{{item[4]["id"]}}" class="btn">Detalles</a>
+                </div>
+                
             </div>
         </div>
     </div>

@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-4 col-sm-12 col-md-6">
-            <div class="card">
+            <div class="card animated fadeInDown show-on-scroll">
                 <img class="card-img-top" src="{{items[8]["image"]}}" alt="Book">
                 <div class="card-body">
                     <h2 class="card-title">Title:</h2>
@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="col-lg-8 col-sm-12 col-md-6">
-            <div class="card">
+            <div class="card animated fadeInDown show-on-scroll">
                 <div class="card-body">
                     <h5>ISBN: </h5>
                 <p id="isbn">{{items[1]["isbn"]}}</p>
@@ -39,19 +39,23 @@
     </div>
 </div>
 
+<div class="container text-center card animated fadeInDown show-on-scroll" style="margin-bottom: 30px;">
+    <h3>Reseñas</h3>
+</div>
+
 {% if bandera %}
-<div class="container row text-center" style="margin-bottom: 30px;">
+<div class="container row text-center headerA show-on-scroll" style="margin-bottom: 30px;">
     <div class="form-group">
         
         <form method="POST">
             <div class="row">
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-lg-6 col-sm-12" style="margin-bottom: 30px;">
                     <input autocomplete="off" required name="review" onkeyup="verificar(this.value);" class="form-style" placeholder="Deja tu reseña..." id="review" autocomplete="none">
                 </div>
-                <div class="col-lg-3 col-sm-12">
+                <div class="col-lg-3 col-sm-12" style="margin-bottom: 30px;">
                     <input autocomplete="off" required step="1" oninput="validity.valid||(value='');" onkeyup="verificar(this.value);" name="stars" type="number" max="5" min="0" class="form-style" placeholder="Del 1 al 5..." id="review2" autocomplete="none">
                 </div>
-                <div class="col-lg-3 col-sm-12">
+                <div class="col-lg-3 col-sm-12" style="margin-bottom: 30px;">
                     <button class="btn" id="send">Ingresar</button>
                 </div>
             </div>     
@@ -63,7 +67,7 @@
 <div class="container row">
     {% for review in reviews %}
     <div class="col-sm-6 col-lg-3">
-        <div class="card">
+        <div class="card headerA show-on-scroll">
             <div class="card-body">
                 <h4 class="card-title">Por: {{review.username}}</h4>
                 <h6 class="card-subtitle mb-2 text-muted">{{review.stars}}/5.0</h6>
