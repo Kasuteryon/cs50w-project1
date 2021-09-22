@@ -150,4 +150,12 @@ body {
 .chosen-container {
   height: 40px;
 }
+
+.footer-back {
+  background-color: #1f2029;
+  color: white;
+  margin-right: 5px;
+  padding: 10px;
+  border-radius: 15px;
+}
 /*# sourceMappingURL=index-style.css.map */
