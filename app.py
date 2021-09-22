@@ -117,14 +117,14 @@ def register():
     error3 = None
     if request.method == "POST":
         logemail=request.form.get("logemail2")
-            
-        rows = db.execute(f"SELECT COUNT(username) FROM users WHERE email = '{logemail}'").fetchall()
-        rows2 = rows = db.execute(f"SELECT COUNT(username) FROM users").fetchall()
+        logname = request.form.get("logname2")
+
+        rows = db.execute(f"SELECT COUNT(email) FROM users WHERE email = '{logemail}'").fetchall()
+        rows2 = db.execute(f"SELECT COUNT(username) FROM users WHERE username = '{logname}'").fetchall()
 
         if rows2[0][0] != 0:
             error3 = True
         elif rows[0][0] == 0:
-            logname = (request.form.get("logname2"))
             logpass = generate_password_hash(request.form.get("logpass2"))
                         
             db.execute(f"INSERT INTO users(username, hash, email) VALUES ('{logname}', '{logpass}', '{logemail}')")
