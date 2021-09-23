@@ -1,6 +1,5 @@
 import os
 import requests
-from dotenv import load_dotenv
 from flask import Flask, session, render_template, redirect, url_for, request, flash, jsonify
 from flask.wrappers import Request
 from flask_session import Session
@@ -13,7 +12,6 @@ import json
 
 app = Flask(__name__)
 
-load_dotenv("./env")
 FLASK_APP = os.getenv("FLASK_APP")
 DB_URL = os.getenv("DB_URL")
 FLASK_DEBUG = os.getenv("FLASK_DEBUG")
@@ -45,7 +43,7 @@ def index():
     username = values[0]['username']
 
     books = db.execute("SELECT * FROM Books ORDER BY title LIMIT 8").fetchall()
-    booksAll = db.execute("SELECT * FROM Books ORDER BY title ").fetchall()
+    #booksAll = db.execute("SELECT * FROM Books ORDER BY title ").fetchall()
 
     items =  []
     dicto = {}
@@ -77,7 +75,7 @@ def index():
     # print(query.paginate(page=page, per_page=items))
     #books.query.paginate()
     #print(books)
-    return render_template("index.html", username=username, books=books, booksAll=booksAll, items=items)
+    return render_template("index.html", username=username, books=books, items=items)
 
 @app.route("/login", methods=["GET", "POST"])  
 def login():
@@ -157,6 +155,7 @@ def details(id_book):
     if request.method == "POST":
         db.execute("INSERT INTO reviews(id_user, id_book, isset, message, stars) VALUES(:id_user, :id_book, :isset, :review, :stars)",
          {"id_user":id,"id_book":id_book,"review":request.form.get("review"),"isset":1, "stars":request.form.get("stars")}) 
+        db.execute("UPDATE books set review = review + 1,score = score + :stars WHERE id_book = :id", {"id":id_book, "stars":request.form.get("stars")})
         db.commit()
     ## Para el detalle
     book = db.execute(f"SELECT * FROM Books WHERE id_book = {id_book}").fetchone()
@@ -177,6 +176,14 @@ def details(id_book):
     itemsApi.append({"isbn": book.isbn})
     itemsApi.append({"author": book.author})
     itemsApi.append({"publish_date": book.publish_date})
+    itemsApi.append({"count": book.review})
+
+    if book.score == 0 and book.review == 0:
+        average = 0
+        itemsApi.append({"score": average})
+    else:
+        average = book.score / book.review
+        itemsApi.append({"score": average})
 
     if response["totalItems"] != 0:
         if "description" in response["items"][0]["volumeInfo"]:
@@ -222,7 +229,6 @@ def details(id_book):
     return render_template("detail.html", username=username, reviews=reviews, bandera=bandera, items=itemsApi)
 
 @app.route("/api/<string:isbn>")
-@login_required
 def api(isbn):
 
     # API OUTPUT
@@ -246,6 +252,23 @@ def api(isbn):
         "review_count": books.review,
         "average_score": average
     })
+
+@app.route("/search", methods=["GET", "POST"])
+@login_required
+def search():
+
+    if request.method == "POST":
+        search = request.form.get("search")
+        
+        exists = True
+        books = db.execute("SELECT * FROM books WHERE isbn LIKE :q OR title LIKE :q OR author LIKE :q LIMIT 60", {"q": "%" + search.capitalize() + "%"}).fetchall()
+
+        if len(books) == 0:
+            exists = False
+
+        return render_template("search.html", books=books, exists=exists)
+
+    return render_template("search.html")
 
 if __name__ == "main":
     app.run()

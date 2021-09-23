@@ -1,14 +1,4 @@
 
-$(".chosen-select").chosen({no_results_text: "No se encuentran registros..."}); 
-
-// Chosen touch support.
-if ($('.chosen-container').length > 0) {
-    $('.chosen-container').on('touchstart', function(e){
-      e.stopPropagation(); e.preventDefault();
-      // Trigger the mousedown event.
-      $(this).trigger('mousedown');
-    });
-  }
 
 $(document).ready(function($) {
     $(document).find('.screen_data').load("../templates/index.html");
@@ -26,6 +16,8 @@ $(document).ready(function($) {
             $(document).find('.screen_data').load("../templates/index.html");
         } else if (screen_name == "details") {
             $(document).find('.screen_data').load("../templates/detail.html");
+        } else if (screen_name == "search") {
+            $(document).find('.screen_data').load("../templates/search.html");
         }
 
     });
@@ -33,14 +25,25 @@ $(document).ready(function($) {
 });
 
 let comment = document.getElementById('review')
-    let star = document.getElementById('review2')
-    let btnEnviar = document.getElementById('send')
+let star = document.getElementById('review2')
+let search = document.getElementById('search')
+let btnEnviar = document.getElementById('send')
 
-    btnEnviar.disabled = true
-    console.log(comment.value.length)
+btnEnviar.disabled = true
+//console.log(comment.value.length)
+//console.log(search.value.length)
 
     verificar = ()=> {
         if (comment.value.length > 10 && star.value.length === 1){
+            
+            btnEnviar.disabled = false;
+        }else{
+            btnEnviar.disabled = true
+        }
+    };
+
+    verificar2 = ()=> {
+        if (search.value.length > 1){
             
             btnEnviar.disabled = false;
         }else{

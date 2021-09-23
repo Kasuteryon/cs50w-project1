@@ -1,0 +1,75 @@
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Busqueda
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title text-center" style="margin-bottom: 30px;">Buscar Libro :)</h1>
+            
+            <form method="POST">
+                <div class="row">
+                    <div class="col-lg-9 col-sm-12" style="margin-bottom: 30px;">
+                        <input autocomplete="off" required name="search" onkeyup="verificar2(this.value);" class="form-style" placeholder="Buscar..." id="search" autocomplete="none">
+                    </div>
+                    <div class="col-lg-3 col-sm-12 text-center" style="margin-bottom: 30px;">
+                        <button class="btn" id="send">Buscar</button>
+                    </div>
+                </div>
+            </form>
+            {% if exists %}
+            <div class="container">
+                <div class="card-group">
+                    <div class="card"> 
+                        <div class="card-body">
+                            <h1 class="card-title">Libros</h1>
+                            <table class="table responsive">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">ISBN</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Author</th>
+                                    <th scope="col">Publication Date</th>
+                                    <th scope="col">More info...</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                {% for book in books %}
+                                  <tr>
+                                    <td>{{book.id_book}}</td>
+                                    <td>{{book.isbn}}</td>
+                                    <td>{{book.title}}</td>
+                                    <td>{{book.author}}</td>
+                                    <td>{{book.publish_date}}</td>
+                                    <td><a screen-name="details" class="btn" href="/details/{{book.id_book}}">Detalles</a></td>
+                                  </tr>
+                                 {% endfor %}
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                        
+                </div>
+            </div>
+            {% elif exists == False %}
+            <div class="container">
+                <div class="card-group">
+                    <div class="card"> 
+                        <div class="card-body">
+                            <h1 class="card-title">Resultados no encontrados...</h1>
+                        </div>
+                    </div>
+                        
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

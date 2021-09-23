@@ -4,12 +4,12 @@
     <div class="row">
         <div class="col-lg-4 col-sm-12 col-md-6">
             <div class="card animated fadeInDown show-on-scroll">
-                <img class="card-img-top" src="{{items[8]["image"]}}" alt="Book">
+                <img class="card-img-top" src="{{items[10]["image"]}}" alt="Book">
                 <div class="card-body">
                     <h2 class="card-title">Title:</h2>
                     <p>{{items[0]["title"]}}</p>
                     <h4>Category: </h4>
-                    <p>{{items[7]["categories"]}}</p>
+                    <p>{{items[9]["categories"]}}</p>
                 </div>
             </div>
         </div>
@@ -26,13 +26,19 @@
                 <p>{{items[3]["publish_date"]}}</p>
 
                 <h5>Description: </h5>
-                <p>{{items[4]["description"]}}</p>
+                <p>{{items[6]["description"]}}</p>
 
                 <h5>Average Rating: </h5>
-                <p>{{items[5]["averageRating"]}}</p>
+                <p>{{items[7]["averageRating"]}}</p>
 
                 <h5>Ratings Count: </h5>
-                <p>{{items[6]["ratingsCount"]}}</p>
+                <p>{{items[8]["ratingsCount"]}}</p>
+
+                <h5>Own Count: </h5>
+                <p>{{items[4]["count"]}}</p>
+
+                <h5>Own Average Score: </h5>
+                <p>{{items[5]["score"]}}</p>
                 </div>
             </div>
         </div>
@@ -54,7 +60,7 @@
                     <input autocomplete="off" required name="review" onkeyup="verificar(this.value);" class="form-style" placeholder="Deja tu reseña..." id="review" autocomplete="none">
                 </div>
                 <div class="col-lg-3 col-sm-12" style="margin-bottom: 30px;">
-                    <input autocomplete="off" required step="1" oninput="validity.valid||(value='');" onkeyup="verificar(this.value);" name="stars" type="number" max="5" min="0" class="form-style" placeholder="Del 1 al 5..." id="review2" autocomplete="none">
+                    <input autocomplete="off" required name="stars" step="1" oninput="validity.valid||(value='');" onkeyup="verificar(this.value);" type="number" max="5" min="0" class="form-style" placeholder="Del 1 al 5..." id="review2" autocomplete="none">
                 </div>
                 <div class="col-lg-3 col-sm-12" style="margin-bottom: 30px;">
                     <button class="btn" id="send">Ingresar</button>

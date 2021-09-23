@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-load_dotenv("./env")
+load_dotenv()
 DB_URL = os.getenv("DB_URL")
 #print(DATABASE_URL)
 
@@ -27,7 +27,7 @@ def main():
 
             i += 1
             print(f"{i}: {isbn} - {author} - {title} - {year}")
-            db.commit()
+            #db.commit()
 
 if __name__ == "__main__":
     main()
