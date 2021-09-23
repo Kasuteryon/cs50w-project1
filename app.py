@@ -257,6 +257,11 @@ def api(isbn):
 @login_required
 def search():
 
+    id = session.get("user_id")
+    
+    values = db.execute(f"SELECT username FROM users WHERE id_user = '{id}'").fetchall()      
+    username = values[0]['username']
+
     if request.method == "POST":
         search = request.form.get("search")
         
@@ -266,9 +271,9 @@ def search():
         if len(books) == 0:
             exists = False
 
-        return render_template("search.html", books=books, exists=exists)
+        return render_template("search.html", books=books, exists=exists, username=username)
 
-    return render_template("search.html")
+    return render_template("search.html", username=username)
 
 if __name__ == "main":
     app.run()
