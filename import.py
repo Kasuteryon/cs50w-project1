@@ -27,7 +27,7 @@ def main():
 
             i += 1
             print(f"{i}: {isbn} - {author} - {title} - {year}")
-            #db.commit()
+            db.commit()
 
 if __name__ == "__main__":
     main()
