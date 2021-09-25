@@ -34,7 +34,7 @@ Se valida que las credenciales sean correctas.
 
 ## A partir de aqui en todas las rutas de python se hace una consulta a la tabla users, la cual consulta el username del usuario actual según la sesión guardada para mostrarla en el header.
 
-### Home Page, sigue ruta "/index"
+### Home Page, sigue ruta "/"
 
 Se muestran los primeros 8 libros en orden alfabético de la biblioteca de la Base de Datos, la cual muestra la imagen de ellos, su titulo, isbn, año, autor y un link para ver sus detalles. Para lograr esto, se hace lo siguiente:
 
