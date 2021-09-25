@@ -43,7 +43,7 @@ btnEnviar.disabled = true
     };
 
     verificar2 = ()=> {
-        if (search.value.length > 1){
+        if (search.value.length > 0){
             
             btnEnviar.disabled = false;
         }else{

@@ -48,7 +48,6 @@ def index():
     items =  []
     dicto = {}
 
-    print("_-------------------------")
 
     for book in books:
         responses = requests.get("https://www.googleapis.com/books/v1/volumes?q=isbn:"+ book.isbn).json()
@@ -113,6 +112,7 @@ def register():
 
     error2 = None
     error3 = None
+    error4 = None
     if request.method == "POST":
         logemail=request.form.get("logemail2")
         logname = request.form.get("logname2")
@@ -120,7 +120,9 @@ def register():
         rows = db.execute(f"SELECT COUNT(email) FROM users WHERE email = '{logemail}'").fetchall()
         rows2 = db.execute(f"SELECT COUNT(username) FROM users WHERE username = '{logname}'").fetchall()
 
-        if rows2[0][0] != 0:
+        if request.form.get("logpass2") != request.form.get("confirmation"):
+            error4 = True
+        elif rows2[0][0] != 0:
             error3 = True
         elif rows[0][0] == 0:
             logpass = generate_password_hash(request.form.get("logpass2"))
@@ -132,7 +134,7 @@ def register():
         else:
             error2 = True
 
-    return render_template("login.html", error2=error2, error3=error3)
+    return render_template("login.html", error2=error2, error3=error3, error4=error4)
 
 @app.route("/logout")
 def logout():

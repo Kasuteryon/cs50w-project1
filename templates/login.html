@@ -90,7 +90,7 @@
 													<input required type="password" name="confirmation" 
 													class="form-style" 
 													placeholder="Repite Contraseña" 
-													id="logpass" 
+													id="confirmation" 
 													autocomplete="none">
 													<i class="input-icon uil uil-lock-alt"></i>
 												</div>
@@ -208,6 +208,24 @@
             position: 'center',
         	icon: 'error',
             text: "Nombre de Usuario Existente",
+            showConfirmButton: true,
+            //timer: 5000,
+			backdrop: `
+			url("../static/images/nyan-cat.gif")
+			left top
+			no-repeat
+  `
+        })
+    </script>
+	
+    {% endif %}
+
+	{% if error4 %}
+    <script>
+        Swal.fire({
+            position: 'center',
+        	icon: 'error',
+            text: "Contraseñas no Iguales",
             showConfirmButton: true,
             //timer: 5000,
 			backdrop: `
