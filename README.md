@@ -26,4 +26,4 @@ La página de login comparte el mismo html que el registro titulado como "login.
 Se valida que las credenciales sean correctas.
 
 #### Para cambiar entre el login y el register clickea la flecha
-[![Esta es una imagen de ejemplo](./static/images/login-slide.png)]
+!(./static/images/login-slide.png)
