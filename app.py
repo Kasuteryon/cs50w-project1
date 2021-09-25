@@ -266,7 +266,7 @@ def search():
         search = request.form.get("search")
         
         exists = True
-        books = db.execute("SELECT * FROM books WHERE isbn LIKE :q OR title LIKE :q OR author LIKE :q LIMIT 60", {"q": "%" + search.capitalize() + "%"}).fetchall()
+        books = db.execute("SELECT * FROM books WHERE isbn LIKE :q OR title LIKE :q OR author LIKE :q OR publish_date LIKE :q LIMIT 60", {"q": "%" + search.capitalize() + "%"}).fetchall()
 
         if len(books) == 0:
             exists = False
